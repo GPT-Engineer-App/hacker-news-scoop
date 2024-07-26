@@ -36,7 +36,10 @@ const SkeletonLoader = () => (
 
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { data, isLoading, error, refetch } = useQuery(['stories', searchTerm], () => fetchStories(searchTerm));
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['stories', searchTerm],
+    queryFn: () => fetchStories(searchTerm),
+  });
 
   const handleSearch = (e) => {
     e.preventDefault();
